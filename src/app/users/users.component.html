@@ -1,6 +1,6 @@
 <h1>Users</h1>
 <p>
-  <a class="btn btn-primary" href="/users/new">Add User</a>
+  <a class="btn btn-primary" routerLink="/users/new">Add User</a>
 </p>
 <table class="table table-bordered">
   <thead>
@@ -15,7 +15,7 @@
     <tr *ngFor="let user of users">
       <td>{{ user.name }}</td>
       <td>{{ user.email }}</td>
-      <td><span class="glyphicon glyphicon-edit"></span></td>
+      <td><a [routerLink]="[user.id]"><span class="glyphicon glyphicon-edit"></span></a></td>
       <td><span class="glyphicon glyphicon-remove"></span></td>
     </tr>
   </tbody>
