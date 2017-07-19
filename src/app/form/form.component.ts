@@ -4,19 +4,17 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { EmailValidators } from './common/email.validators';
-import { UserService } from '../users/users.service';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css'],
-  providers: [UserService]
+  styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit{
   form : FormGroup ;
   users;
 
-  constructor(fb: FormBuilder, private _route: ActivatedRoute, private _userService: UserService){
+  constructor(fb: FormBuilder, private _route: ActivatedRoute){
     
     this.form = fb.group({
       name: ['',Validators.compose([
@@ -43,10 +41,6 @@ export class FormComponent implements OnInit{
         console.log(+params.get('id'));
       }
     );
-
-    this._userService.getUsers().subscribe(users=>{
-      this.users = users;
-    });
   }
   get name(){
     return this.form.controls.name;

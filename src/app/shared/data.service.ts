@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'; 
 
-import { Users } from './users';
+import { Users } from './interfaces';
 
 @Injectable()
 export class UserService {
