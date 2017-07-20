@@ -6,17 +6,21 @@ import { Observable } from 'rxjs/Observable';
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
-  providers: [UserService]
+  providers: []
 })
 export class UsersComponent implements OnInit {
   users;
 
-  constructor(private _userService: UserService) { }
+  constructor(private _usersService: UserService) { }
 
   ngOnInit() {
-    this._userService.getUsers().subscribe(users => {
+    this._usersService.getUsers().subscribe(users => {
       this.users = users;
     });
   }
 
+  onEditUser(id:number){
+    console.log("Event triggered");
+    this._usersService.getUser(id).subscribe(user=>console.log(user));
+  }
 }

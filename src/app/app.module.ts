@@ -5,12 +5,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-
-import { mainRouting } from './app.routing';
 import { HomeComponent } from './home/home.component';
 import { UsersComponent } from './users/users.component';
 import { PostsComponent } from './posts/posts.component';
 import { FormComponent } from './form/form.component';
+
+import { mainRouting } from './app.routing';
+import { UserService } from './shared/data.service';
+import { ConfigService } from './shared/config.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,10 @@ import { FormComponent } from './form/form.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    UserService,
+    ConfigService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
