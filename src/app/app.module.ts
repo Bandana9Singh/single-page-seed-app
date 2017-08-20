@@ -5,9 +5,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
-import { UsersComponent } from './users/users.component';
 import { PostsComponent } from './posts/posts.component';
+import { UsersComponent } from './users/users.component';
+import { HomeComponent } from './home/home.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { FormComponent } from './form/form.component';
 
 import { mainRouting } from './app.routing';
@@ -18,9 +19,10 @@ import { ConfigService } from './shared/config.service';
   declarations: [
     AppComponent,
     NavbarComponent,
-    HomeComponent,
-    UsersComponent,
     PostsComponent,
+    UsersComponent,
+    HomeComponent,
+    NotFoundComponent,
     FormComponent
   ],
   imports: [

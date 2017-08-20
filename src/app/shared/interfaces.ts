@@ -8,9 +8,9 @@ export interface User {
     email: string;
     phone: string;
     address: {
-        street: string,
-        suite: string,
-        city: string,
-        zipcode: string
+        street: string;
+        suite: string;
+        city: string;
+        zipcode: string;
     }
 }

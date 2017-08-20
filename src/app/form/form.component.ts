@@ -1,71 +1,61 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { ActivatedRoute } from '@angular/router'; 
+import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import { EmailValidators } from './common/email.validators';
+import { User } from '../shared/interfaces';
 import { UserService } from '../shared/data.service';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css'],
-  providers: []
+  styleUrls: ['./form.component.css']
 })
-export class FormComponent implements OnInit{
-  form : FormGroup ;
-  address: FormGroup ;
-  users;
-
-  constructor(private fb: FormBuilder, private _route: ActivatedRoute, private _userService: UserService){
-    
-    this.form = fb.group({
+export class FormComponent implements OnInit {
+  private form: FormGroup;
+  
+  constructor(private _fb: FormBuilder, private _userService: UserService, private _activeRoute: ActivatedRoute) {
+    this.form = _fb.group({
       name: ['',Validators.compose([
         Validators.required,
         Validators.minLength(5)
       ])],
-      email: ['', Validators.compose([
+      email: ['',Validators.compose([
         Validators.required,
         EmailValidators.invalidEmail
       ])],
-      phone: [],
-      address: fb.group({
-        street: [],
-        suite: [],
-        city: [],
-        zipcode: []
+      phone: [''],
+      address: _fb.group({
+        street: [''],
+        suite: [''],
+        city: [''],
+        zipcode: ['']
       })
     });
   }
 
   ngOnInit() {
-    this._route.paramMap.subscribe(
-      params => {
-       //console.log(+params.get('id'));
-       let id = params.get('id');
-       if(id != undefined) {
-         console.log(this.form);
-         this._userService.getUser(+params.get('id')).subscribe(user=>{
-           console.log(user);
-           this.form.controls.name.setValue(user.name);
-           this.form.controls.email.setValue(user.email);
-           this.form.controls.phone.setValue(user.phone);
-        });
-       }
-       else {
-        console.log("id not available");
-       }
-      }  
-    );
+    
+    /*this._activeRoute.paramMap.subscribe(params => {
+      let id = +params.get('id');
+      if(!id)
+        return;
+      this._userService.getUser(id).subscribe(user => {
+        this.user = user;
+        console.log("User populated");
+      });
+     }); */
+  }
 
+  get name() {
+    return this.form.get('name');
   }
-  get name(){
-    return this.form.controls.name;
+
+  get email() {
+    return this.form.get('email');
   }
-  get email(){
-    return this.form.controls.email;
+
+  saveButton() {
+    this._userService.addUser(this.form.value);
   }
-  save(){
-    //this._userService.getUser(1).subscribe(user=>console.log(user));
-  }  
 }

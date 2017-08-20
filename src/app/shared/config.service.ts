@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 
-Injectable()
+@Injectable()
 export class ConfigService {
-    _userUrl: String;
+    _usersUrl: String;
 
     constructor(){
-        this._userUrl='https://jsonplaceholder.typicode.com/users';
+        this._usersUrl='https://jsonplaceholder.typicode.com/users';
     }
-    getUsersUrl() {
-        return this._userUrl;
+
+    getUsersUrl(){
+      return this._usersUrl;  
     }
 }
+

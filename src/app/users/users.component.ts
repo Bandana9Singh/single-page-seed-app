@@ -1,26 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../shared/data.service';
 import { Observable } from 'rxjs/Observable';
+
+import { UserService } from '../shared/data.service';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css'],
-  providers: []
+  styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
   users;
-
-  constructor(private _usersService: UserService) { }
-
-  ngOnInit() {
-    this._usersService.getUsers().subscribe(users => {
-      this.users = users;
+  constructor(private _userService: UserService) {
+    this._userService.getUsers().subscribe(response => {
+      this.users = this._userService.userStack(response);
     });
   }
 
-  onEditUser(id:number){
-    console.log("Event triggered");
-    this._usersService.getUser(id).subscribe(user=>console.log(user));
+  ngOnInit() {
+    this.users = this._userService.userStack(this.users);
   }
 }
